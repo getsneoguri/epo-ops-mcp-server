@@ -334,7 +334,7 @@ import os
 if __name__ == "__main__":
     transport = os.getenv("MCP_TRANSPORT_TYPE", "streamable-http")
     host = os.getenv("SERVER_HOST", "0.0.0.0")
-    port = int(os.getenv("SERVER_PORT", "8000"))
+    port = int(os.getenv("PORT", os.getenv("SERVER_PORT", "8000")))
 
     if transport == "stdio":
         mcp.run()
