@@ -329,6 +329,14 @@ def get_image(
     # For images, we might want to return the content differently
     return format_response(response.text, response.headers.get('content-type', ''))
 
+import os
+
 if __name__ == "__main__":
-    # Run the server
-    mcp.run()
+    transport = os.getenv("MCP_TRANSPORT_TYPE", "streamable-http")
+    host = os.getenv("SERVER_HOST", "0.0.0.0")
+    port = int(os.getenv("SERVER_PORT", "8000"))
+
+    if transport == "stdio":
+        mcp.run()
+    else:
+        mcp.run(transport="streamable-http", host=host, port=port)
